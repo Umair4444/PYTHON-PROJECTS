@@ -1,0 +1,58 @@
+[
+    {
+        "title": "Harry Potter Series",
+        "author": "JK Rowling",
+        "year": "2000",
+        "genre": "Magic and Fantasy",
+        "read": false
+    },
+    {
+        "title": "Kahani",
+        "author": "Parosi",
+        "year": "2024",
+        "genre": "gossip",
+        "read": false
+    },
+    {
+        "title": "yfyufi",
+        "author": "tdtdu",
+        "year": "oiuou",
+        "genre": "oiyoiy",
+        "read": true
+    },
+    {
+        "title": "iojilh",
+        "author": "fgxfgx",
+        "year": "fyjf",
+        "genre": "gukg",
+        "read": true
+    },
+    {
+        "title": "Lord of the Rings",
+        "author": "",
+        "year": "1990",
+        "genre": "Magic",
+        "read": false
+    },
+    {
+        "title": "Twilight",
+        "author": "",
+        "year": "2222",
+        "genre": "Vampire and Werewolf",
+        "read": false
+    },
+    {
+        "title": "sdf",
+        "author": "sdf",
+        "year": "sdfsd",
+        "genre": "sdfs",
+        "read": true
+    },
+    {
+        "title": "dfsdcdsf",
+        "author": "Unknown",
+        "year": "Not Specific",
+        "genre": "Other",
+        "read": false
+    }
+]
