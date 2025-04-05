@@ -2,7 +2,7 @@ import streamlit as st
 import random
 
 if "target_number" not in st.session_state:
-    st.session_state.target_number = random.randint(1, 5)
+    st.session_state.target_number = random.randint(1, 100)
 if "guesses" not in st.session_state:
     st.session_state.guesses = []
 
