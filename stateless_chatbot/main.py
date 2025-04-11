@@ -12,4 +12,4 @@ async def main(message : cl.Message):
     print("cl.Message",cl.Message) # gives class address
     response = f"You said {message.content} by {message.author}"
 
-    await cl.Message(content=response , author="Devil").send()
+    await cl.Message(content=response ).send()
