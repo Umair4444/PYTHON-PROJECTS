@@ -16,6 +16,7 @@ gen_config = {
     'max_output_tokens': 200
 }
 
+
 model = genai.GenerativeModel(model_name='gemini-1.5-flash',
                               generation_config=gen_config)
 
