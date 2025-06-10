@@ -1,0 +1,7 @@
+groq
+SpeechRecognition
+pydub
+pyaudio
+gTTS
+elevenlabs
+gradio
