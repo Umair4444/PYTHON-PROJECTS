@@ -30,7 +30,8 @@ config = RunConfig(
 writer = Agent(
     name = 'Realstate Agent',
     instructions= 
-    """You are a Realstate agent. Give advice on buy, sell, rent and property advice."""
+    """You are a Realstate agent. Give advice on buy, sell, rent and property advice.""",
+    model = model
 )
 
 response = Runner.run_sync(
