@@ -1,3 +1,4 @@
+# portaudio and ffmpeg and pyaudio
 import logging
 import speech_recognition as sr
 from pydub import AudioSegment
@@ -16,11 +17,8 @@ GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 if not GROQ_API_KEY:
     raise ValueError("Missing GROQ_API_KEY in environment variables.")
 
-stt_model = "whisper-large-v3"
-audio_filepath = "patient_voice_test_for_patient.mp3"
+def transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY=GROQ_API_KEY):
 
-
-def transcribe_with_groq(stt_model=stt_model, audio_filepath=audio_filepath, GROQ_API_KEY=GROQ_API_KEY):
     client = Groq(api_key=GROQ_API_KEY)
     with open(audio_filepath, "rb") as audio_file:
         transcription = client.audio.transcriptions.create(
@@ -51,12 +49,16 @@ def record_audio(file_path, timeout=20, phrase_time_limit=None):
         logging.error(f"An error occurred while recording: {e}")
 
 if __name__ == '__main__':
-    try:        
+    try:
+        stt_model = "whisper-large-v3"
+        audio_filepath = "patient_voice_test_for_patient.mp3"      
+          
         # Step 1: Record the audio
         record_audio(file_path=audio_filepath)
 
         # Step 2: Transcribe using Groq
-        transcription = transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY)
+        # transcription = transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY)
+        transcription = transcribe_with_groq(stt_model=stt_model, audio_filepath=audio_filepath, GROQ_API_KEY=GROQ_API_KEY)
 
         # Step 3: Output transcription
         print("\n📝 Transcription:")

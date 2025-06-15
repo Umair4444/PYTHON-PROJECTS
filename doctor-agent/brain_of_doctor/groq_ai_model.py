@@ -11,9 +11,31 @@ GROQ_API_KEY = os.environ.get('GROQ_API_KEY')
 if not GROQ_API_KEY:
     raise ValueError("GROQ_API_KEY not found in environment variables. Please set it in your .env file.")
 
-image_path = 'acne.jpg'
+image_path = 'images/acne.jpg'
 
 def encode_image(image_path=image_path):
+    """
+    Encode an image file to base64.
+    
+    Args:
+        image_path (str): Path to the image file.
+    
+    Returns:
+        str: Base64-encoded string of the image.
+    
+    Raises:
+        FileNotFoundError: If the image file does not exist.
+    """
+
+    try:
+        with open(image_path, 'rb') as image_file:
+            encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
+        return encoded_image
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Image file not found at: {image_path}")
+
+
+def analyse_image_with_query():
     """
     Analyze an image with a query using the Groq API.
     
@@ -27,30 +49,6 @@ def encode_image(image_path=image_path):
     
     Raises:
         Exception: If the API request fails.
-    """
-    try:
-        with open(image_path, 'rb') as image_file:
-            encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
-        return encoded_image
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Image file not found at: {image_path}")
-
-query = "What is wrong with me?"
-model = "meta-llama/llama-4-scout-17b-16e-instruct"
-
-encoded_image = encode_image()
-def analyse_image_with_query(query=query, model=model, encoded_image=encoded_image):
-    """
-    Encode an image file to base64.
-    
-    Args:
-        image_path (str): Path to the image file.
-    
-    Returns:
-        str: Base64-encoded string of the image.
-    
-    Raises:
-        FileNotFoundError: If the image file does not exist.
     """
     try:
         client = Groq(api_key=GROQ_API_KEY)
@@ -75,7 +73,10 @@ def analyse_image_with_query(query=query, model=model, encoded_image=encoded_ima
 
 if __name__ == '__main__':
     try:
-        response = analyse_image_with_query()
+        query = "What is wrong with me?"
+        model = "meta-llama/llama-4-scout-17b-16e-instruct"
+        encoded_image = encode_image()
+        response = analyse_image_with_query(query=query, model=model, encoded_image=encoded_image)
         print("Response from Groq API:")
         print(response)
     except Exception as e:
