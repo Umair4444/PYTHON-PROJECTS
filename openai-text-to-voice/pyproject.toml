@@ -1,0 +1,14 @@
+[project]
+name = "openai-text-to-voice"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "elevenlabs>=2.3.0",
+    "gtts>=2.5.4",
+    "openai-agents[voice]>=0.0.17",
+    "pydub>=0.25.1",
+    "sounddevice>=0.5.2",
+]
