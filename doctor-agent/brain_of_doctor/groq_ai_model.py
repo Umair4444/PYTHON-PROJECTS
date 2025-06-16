@@ -35,7 +35,7 @@ def encode_image(image_path=image_path):
         raise FileNotFoundError(f"Image file not found at: {image_path}")
 
 
-def analyse_image_with_query():
+def analyse_image_with_query(query,model,encoded_image):
     """
     Analyze an image with a query using the Groq API.
     

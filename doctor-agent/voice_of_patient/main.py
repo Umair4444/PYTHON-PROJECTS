@@ -1,11 +1,15 @@
 # portaudio and ffmpeg and pyaudio
 import logging
+from deep_translator import GoogleTranslator
+from gtts import gTTS
 import speech_recognition as sr
 from pydub import AudioSegment
 from io import BytesIO
 import os
 from groq import Groq
 from dotenv import load_dotenv
+from pydub import AudioSegment
+from pydub.playback import play
 
 # Load environment variables from .env
 load_dotenv()
@@ -48,6 +52,25 @@ def record_audio(file_path, timeout=20, phrase_time_limit=None):
     except Exception as e:
         logging.error(f"An error occurred while recording: {e}")
 
+def translate_to_urdu(text):
+    try:
+        translated = GoogleTranslator(source='auto', target='ur').translate(text)
+        print(f"📝 Translated Text: {translated}")
+        with open("output.txt", "a+", encoding="utf-8") as f:
+            f.write(f"📝 Translated Text: {translated}\n")
+
+        return translated
+    except Exception as e:
+        print(f"❌ Translation Error: {e}")
+        return None
+    
+def text_to_speech(text, lang="ur", output_file="translated_audio.mp3"):
+    tts = gTTS(text=text, lang=lang)
+    tts.save(output_file)
+    logging.info(f"Translated audio saved as: {output_file}")
+    audio = AudioSegment.from_mp3(output_file)
+    play(audio)    
+
 if __name__ == '__main__':
     try:
         stt_model = "whisper-large-v3"
@@ -63,6 +86,14 @@ if __name__ == '__main__':
         # Step 3: Output transcription
         print("\n📝 Transcription:")
         print(transcription)
+
+        # Translate the text
+        translated_text = translate_to_urdu(transcription)
+        print(f"\n🌍 Translated ({translated_text}):")
+
+        # Speak the translated text
+        if translated_text:
+            text_to_speech(translated_text)
 
     except Exception as e:
         print(f"An error occurred: {str(e)}")

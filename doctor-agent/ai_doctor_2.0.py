@@ -3,7 +3,7 @@ import os
 from dotenv import load_dotenv
 
 from brain_of_doctor.groq_ai_model import analyse_image_with_query, encode_image
-from voice_of_patient.main import transcribe_with_groq
+from voice_of_patient.main import transcribe_with_groq, text_to_speech, translate_to_urdu
 from voice_of_doctor.main import text_to_speech_with_elevenlabs
 
 load_dotenv()

@@ -89,9 +89,9 @@ if __name__ == '__main__':
     try:      
         input_text="Hi this is Ai with Umair!, autoplay testing!"
         # text_to_speech_with_gtts()
-        text_to_speech_with_gtts(input_text=input_text, output_filepath="gtts_testing_autoplay.mp3")
+        # text_to_speech_with_gtts(input_text=input_text, output_filepath="gtts_testing_autoplay.mp3")
         # text_to_speech_with_elevenlabs()
-        # text_to_speech_with_elevenlabs(input_text=input_text, output_filepath="elevenlabs_testing_autoplay.mp3")
+        text_to_speech_with_elevenlabs(input_text=input_text, output_filepath="elevenlabs_testing_autoplay.mp3")
 
         input_text="Hi this is A-I with Umair! without autoplay"
         # text_to_speech_with_gtts_manually_play()
