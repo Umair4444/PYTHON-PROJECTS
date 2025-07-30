@@ -22,6 +22,7 @@ async def handle_start_chat():
 async def handle_message(message:cl.Message):
     question = message.content
 
+    # generate content via llm
     response = model.generate_content(question)
 
     response_text = response.text if hasattr(response, "text") else ""
