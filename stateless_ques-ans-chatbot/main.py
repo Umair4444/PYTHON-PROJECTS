@@ -22,7 +22,8 @@ async def handle_start_chat():
 async def handle_message(message:cl.Message):
     question = message.content # prompt to the user
 
- 
+    response = model.generate_content(question) 
+    
     response_text = response.text if hasattr(response, "text") else ""
 
     await cl.Message(content=response_text).send()
