@@ -9,12 +9,21 @@ app = FastAPI()
 
 app.mount('/static',StaticFiles(directory='static'), name='static')
 
-templates = Jinja2Templates(directory='templates') # this is pointing to directory from where html is rendered
+templatesfolder = Jinja2Templates(directory='templates') # this is pointing to directory from where html is rendered currently in root (templates folder)
+templatesroot = Jinja2Templates(directory='.') # this is pointing to directory from where html is rendered currently in root (.)
 
 
-@app.get("/",response_class=HTMLResponse)
+@app.get("/",response_class=HTMLResponse) # tell the route url like "/"
 def read_root(request:Request):
-    return templates.TemplateResponse(
+    return templatesroot.TemplateResponse(
+        request=request ,
+        name = 'person.html' # tell which page to render only one page can render in one request like person.html render here
+        # name = 'index.html' # tell which page to render only one page can render in one request like person.html render here
+    )
+
+@app.get("/desiredpath",response_class=HTMLResponse) # tell the route url like "/desiredpath"
+def read_root(request:Request):
+    return templatesfolder.TemplateResponse(
         request=request ,
         name = 'index.html'
     )
@@ -23,6 +32,10 @@ def read_root(request:Request):
 def read_msg():
     return {"message": "Hello World"}
 
+
 @app.get("/items/{item_id}")
-def read_item(item_id: int, q: Union[str, None] = None):
+def read_item(item_id: int, q: Union[str, None,int] = None):
+    q = 33
     return {"item_id": item_id, "q": q}
+
+# for running type cmd fastapi dev .\main.py
