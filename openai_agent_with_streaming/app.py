@@ -54,8 +54,8 @@ async def main():
         # We'll ignore the raw responses event deltas
         if event.type == "raw_response_event":
             continue
-            # if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
-            #     print(event.data.delta, end="", flush=True)
+        # if event.type == "raw_response_event" and isinstance(event.data, ResponseTextDeltaEvent):
+        #     print(event.data.delta, end="", flush=True)
         elif event.type == "agent_updated_stream_event":
             print(f"Agent updated: {event.new_agent.name}")
             continue
