@@ -1,3 +1,4 @@
+import asyncio
 from agents import Agent, Runner, AsyncOpenAI, OpenAIChatCompletionsModel, RunConfig, function_tool
 from dotenv import load_dotenv
 import requests
@@ -30,7 +31,7 @@ config = RunConfig(
 # Define a route for /weather?city=CityName
 @function_tool
 def get_weather(city: str):
-    """Give dwtail weather on the city
+    """Give detail weather on the city
     
     Args : get city name from the prompt
     """
@@ -53,19 +54,41 @@ def get_weather(city: str):
         "wind_speed_kmph": current["windspeedKmph"]
     }
 
-
 # Realstate Agent
 writer = Agent(
     name = 'Manager',
-    instructions= 
-    """You are a helpful assisstant and respond to queries in a romantic manner.""",
+    instructions= """
+                You are a helpful assistant. 
+                If the query is about weather, call the 'get_weather' tool. 
+                Otherwise, answer directly without using any tools.
+                Always respond in a romantic manner.
+                    """,  
     model = model,
     tools=[get_weather]
 )
 
-response = Runner.run_sync(
-    writer,
-    input = 'What is the current weather in Islamabad?',
-    run_config = config
-    )
-print(response.final_output)
+async def main():
+    try:
+        response = await Runner.run(
+            writer,
+            # input = 'What is the current weather in Islamabad?',
+            input = 'founder of pakistan',
+            run_config = config
+            )
+        
+        print("response --> ",response.final_output)
+    except ConnectionError:
+        print("No Connection")
+    except TimeoutError:
+        print("Timeout Connection")
+    except KeyError:
+        print("KeyError")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+    else:
+        print(f"successful Result: {response.final_output}")
+    finally:
+        print('finished')
+
+if __name__ == "__main__":
+    asyncio.run(main())
