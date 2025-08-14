@@ -144,11 +144,12 @@ async def main():
                             # 'Who is the founder of facebook and sum of 2 and 8 and 3 multiply by 3',
                             # 'sum of 2 and 8 and 3 multiply by 3',
                             # 'multiply 4 by 4',
-                            # "weather in karachi",
+                            "weather in karachi",
                             # "find Tribù Elio Chair",
                             # "find all chair",
+                            # "find all tv",
                             # "find product price 850",
-                            "find all chair below price 700",
+                            # "find all chair below price 700",
                             # 'find products between 100 and 300 price',
                             # 'find chair of price 1200',
                             run_config=config,
@@ -157,10 +158,6 @@ async def main():
             print("Error" , e)
         else:
             rich.print("[RESULT]: ", result.final_output)
-
-            # # If the tool returns a dictionary
-            # if isinstance(result.final_output, dict) and "count" in result.final_output:
-            #     print(f"✅ Total products found: {result.final_output['count']}")
 
             print("Last Agent ==> ", result.last_agent.name)
 
