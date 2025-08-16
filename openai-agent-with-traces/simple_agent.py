@@ -10,7 +10,7 @@ agent = Agent(
     instructions = 
     """
     You are a helpful assistant. 
-    If the query is about location, call the 'get_weather' tool. 
+    If the query is about location, call the 'get_location' tool. 
     Otherwise, answer directly without using any tools.
     Always respond in a junkie tone.
     """,
