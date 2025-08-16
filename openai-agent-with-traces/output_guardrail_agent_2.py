@@ -78,7 +78,8 @@ triage_agent = Agent(
 
 with trace('Output Guardrail Agent 1'):
     try:
-        result = Runner.run_sync(triage_agent, 
+        result: WordOutput= Runner.run_sync(
+                                triage_agent, 
                                 'Who is the founder of facebook ',
                                 # 'What is my location ',
                                 # 'how to play poker',
