@@ -1,4 +1,4 @@
-from datetime import date, timedelta
+from datetime import date
 from agents import Agent, Runner, trace, function_tool
 from connection.myagent import config
 import asyncio
