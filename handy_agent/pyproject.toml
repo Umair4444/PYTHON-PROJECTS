@@ -1,0 +1,23 @@
+[project]
+name = "handy-agent"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dotenv>=0.9.9",
+    "numpy>=2.2.6",
+    "openai-agents>=0.2.2",
+    "openai-whisper",
+    "pyaudio>=0.2.14",
+    "pyautogui>=0.9.54",
+    "pydub>=0.25.1",
+    "pyttsx3>=2.99",
+    "scipy>=1.16.1",
+    "sounddevice>=0.5.2",
+    "speechrecognition>=3.14.3",
+    "torch>=2.7.1",
+]
+
+[tool.uv.sources]
+openai-whisper = { git = "https://github.com/openai/whisper.git" }
