@@ -4,7 +4,6 @@ import logging
 from deep_translator import GoogleTranslator
 from gtts import gTTS
 import speech_recognition as sr
-from pydub import AudioSegment
 from io import BytesIO
 import os
 from groq import Groq
@@ -53,6 +52,7 @@ def transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY=GROQ_API_KEY):
             file=audio_file,
             language="en"
         )
+        print("groq transcription",transcription)
     return transcription.text
 
 def record_audio(file_path, timeout=20, phrase_time_limit=None):
@@ -117,7 +117,7 @@ if __name__ == '__main__':
         # Step 1: Record audio
         record_audio(file_path=audio_filepath)
 
-        # Step 2: Transcribe using Groq
+        # Step 2: Transcribe using Groq (speech to text)
         transcription = transcribe_with_groq(stt_model, audio_filepath, GROQ_API_KEY)
 
         # Step 3: Save transcription
