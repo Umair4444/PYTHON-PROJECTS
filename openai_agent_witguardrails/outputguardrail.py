@@ -21,7 +21,7 @@ gemini_api_key = os.getenv("GEMINI_API_KEY")
 # Check if the API key is present; if not, raise an error
 if not gemini_api_key:
     raise ValueError("GEMINI_API_KEY is not set. Please ensure it is defined in your .env file.")
-print("🔐 GEMINI_API_KEY:", gemini_api_key)
+# print("🔐 GEMINI_API_KEY:", gemini_api_key)
 
 
 #Reference: https://ai.google.dev/gemini-api/docs/openai
@@ -78,8 +78,11 @@ agent = Agent(
 async def main():
     # This should trip the guardrail
     try:
-        response = await Runner.run(agent, "Hello, can you help me solve for x: 2x + 3 = 11?",run_config=config)
-        print("Guardrail didn't trip - this is unexpected")
+        response = await Runner.run(agent, 
+                                    # "Hello, can you help me solve for x: 2x + 3 = 11?"
+                                    "who is the founder of microsoft"
+                                    ,run_config=config)
+        print("Guardrail didn't trip")
 
         print(response.final_output)
 

@@ -24,7 +24,7 @@ gemini_api_key = os.getenv("GEMINI_API_KEY")
 # Check if the API key is present; if not, raise an error
 if not gemini_api_key:
     raise ValueError("GEMINI_API_KEY is not set. Please ensure it is defined in your .env file.")
-print("🔐 GEMINI_API_KEY:", gemini_api_key)
+# print("🔐 GEMINI_API_KEY:", gemini_api_key)
 
 
 #Reference: https://ai.google.dev/gemini-api/docs/openai
@@ -84,15 +84,15 @@ manager = Agent(
 
 async def myfunc():
     try:
-        response =await Runner.run(
+        response = await Runner.run(
             manager,
             # input="How to make coffee in 3 lines only and no useless information",
             input="Solve: (2x + 5)^2 = 49",
             run_config=config
         )
-        print("Guardrail didn't trip - this is unexpected")
+        print("Guardrail didn't trip\n")
 
-        print(response.final_output)
+        print("Main Agent",response.final_output)
     except InputGuardrailTripwireTriggered:
         print('Input Guardrail trigerred')
         
