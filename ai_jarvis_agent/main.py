@@ -1,27 +1,17 @@
-# main.py
-from audio_to_text_engine import speak
+import asyncio
 from my_triage_agent import ask_the_agent
-from agent_voice_output import speak_text
+from input_to_voice import text_to_speech_with_gtts
+from voice_to_input import record_and_save_text
 
-print("🎤 Voice Triage Agent Started. Say 'bye' to exit.")
+async def main():
+    user_input = record_and_save_text()
+    if user_input:
+        print(f"🧠 Processing your command: {user_input}")
+        response = await ask_the_agent(prompt=user_input)   # ✅ await here
+        print(f"🧠 Agent Response: {response}")
+        text_to_speech_with_gtts(response, "agent_response.mp3")
+    else:
+        print("❌ No valid input detected.")
 
-while True:
-    # 1️⃣ Get user input via voice
-    user_input = speak()
-    if not user_input:
-        continue  # retry if nothing heard
-
-    print(f"🗣 You: {user_input}")
-
-    # 2️⃣ Break loop if user says bye
-    if user_input.lower() in ["bye", "exit", "quit"]:
-        speak_text("Goodbye!")
-        print("👋 Exiting. Goodbye!")
-        break
-
-    # 3️⃣ Get agent response
-    agent_response = ask_the_agent(user_input)
-    print(f"🤖 Agent: {agent_response}")
-
-    # 4️⃣ Speak the agent response
-    speak_text(agent_response)
+if __name__ == "__main__":
+    asyncio.run(main())
